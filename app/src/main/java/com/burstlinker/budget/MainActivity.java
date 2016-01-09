@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
                    public void onClick(View V)
                    {
 
+                       //check if either field is empty - will only execute if both fields are completed
                        if (!(isEmpty(purchaseName) || isEmpty(purchasePrice)))
                        {
                            Purchase purchase = new Purchase();
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity
                                purchasePrice.setText("Number format exception");
                            }
                            purchase.setDate(); //timestamp using epoch time
+                           db.addRecord(purchase);
+                           //clear both fields
                            purchaseName.setText("");
                            purchasePrice.setText("");
 

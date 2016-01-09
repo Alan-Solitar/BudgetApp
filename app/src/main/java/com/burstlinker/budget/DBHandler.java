@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+
 /**
  * Created by BurstLinker 2 on 2015/11/26.
  */
@@ -31,10 +33,10 @@ public class DBHandler extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         String query = "CREATE TABLE "+PURCHASE_TABLE + " ( "+
-                COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT "+
-                COL_2 + " TEXT" +
-                COL_3 + " DECIMAL(10,2)"+
-                COL_4 + " INTEGER";
+                COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                COL_2 + " TEXT," +
+                COL_3 + " DECIMAL(10,2),"+
+                COL_4 + " INTEGER"+")";
         db.execSQL(query);
 
     }
@@ -68,12 +70,25 @@ public class DBHandler extends SQLiteOpenHelper
         db.close();
         return true;
     }
-    public Cursor getRecords()
+    public ArrayList<Purchase> getRecords()
     {
+        ArrayList<Purchase> purchases = new ArrayList<Purchase>();
         SQLiteDatabase db =getWritableDatabase();
         String query = "SELECT * FROM "+ PURCHASE_TABLE;
         Cursor resultSet = db.rawQuery(query,null);
-        return resultSet;
+
+        while(resultSet.moveToNext())
+        {
+            Purchase current = new Purchase();
+            current.setID(resultSet.getInt(0));
+            current.setName(resultSet.getString(1));
+            current.setPrice(resultSet.getFloat(2));
+            current.setDate(resultSet.getLong(3));
+            purchases.add(current);
+        }
+        resultSet.close();
+        db.close();
+        return purchases;
     }
 
 

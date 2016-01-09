@@ -24,13 +24,13 @@ public class DataDisplay extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_display);
-     //   db= new DBHandler(this,null,null,1);
-      //  Cursor results = db.getRecords();
-
+        db= new DBHandler(this,null,null,1);
+        purchases = db.getRecords();
         recycle = (RecyclerView) findViewById(R.id.my_recycler_view);
         myLayoutManager = new LinearLayoutManager(this);
         recycle.setLayoutManager(myLayoutManager);
 
+/*
         //test data
         Purchase p = new Purchase();
         p.setName("item1");
@@ -39,6 +39,7 @@ public class DataDisplay extends AppCompatActivity
         p.setDate();
         ArrayList<Purchase> purchases = new ArrayList<Purchase>();
         purchases.add(p);
+        */
         adapter = new MyAdapter(purchases);
         recycle.setAdapter(adapter);
 
