@@ -1,11 +1,13 @@
 <resources>
+
+    <!-- Strings -->
     <string name = "app_name">Budget</string>
     <string name = "name_text">Item Name</string>
     <string name = "price_text">Price</string>
     <string name = "category_text">Category</string>
     <string name = "audio_note_text">Audio Note</string>
     <string name = "date_text">Date</string>
-    <string name = "date_text_current">Use Today's Date</string>
+    <string name = "date_text_current">Use Today\'s Date</string>
     <string name = "action_settings">Settings</string>
     <string name = "enter_button_text">Enter</string>
     <string name = "display_button_text">View</string>
@@ -13,4 +15,14 @@
     <string name = "date_format">yyyy-MM-dd</string>
     <string name = "hello_world">Hello world!</string>
     <string name = "dummy_text">Dummy Text</string>
+
+    <!-- String Arrays-->
+    <string-array name="category_array">
+        <item>FOOD</item>
+        <item>Family</item>
+        <item>Health</item>
+        <item>Leisure</item>
+        <item>Transportation</item>
+        <item>Job/Education</item>
+    </string-array>
 </resources>

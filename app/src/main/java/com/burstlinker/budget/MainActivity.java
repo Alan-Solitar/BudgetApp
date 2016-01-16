@@ -1,27 +1,27 @@
 package com.burstlinker.budget;
 
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.content.Intent;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements DatePickerFragment.TheListener
 {
     DBHandler db;
     Button enterButton;
     Button displayButton;
     EditText purchaseName;
     EditText purchasePrice;
-    EditText purchasDate;
-    RadioButton rButton;
-    int FRAGMENT_ID = 1001;
+    EditText purchaseDate;
+    CheckBox cBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,8 +35,12 @@ public class MainActivity extends AppCompatActivity
         displayButton = (Button) findViewById(R.id.display_button);
         purchaseName = (EditText)findViewById(R.id.Item_EditText);
         purchasePrice = (EditText)findViewById(R.id.Price_EditText);
+        purchaseDate = (EditText)findViewById(R.id.Date_EditText);
+
+        //Methods that correspond to various clicks
         insertData();
         displayData();
+        displayPicker();
     }
 
     public void insertData()
@@ -120,33 +124,41 @@ public class MainActivity extends AppCompatActivity
     }
     private void displayPicker()
     {
-        //get id of Radio Button
-        rButton = (RadioButton)findViewById(R.id.rButton);
+        //get id of CheckBox
+        cBox = (CheckBox)findViewById(R.id.cBox);
 
         //If checked, use current date.
         //If not checked, launch datepicker fragment
-        rButton.setOnClickListener(
-                new Button.OnClickListener()
+        cBox.setOnClickListener(
+                new CheckBox.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
                     {
-                       if(rButton.isChecked())
-                       {
+                        if (!cBox.isChecked())
+                        {
 
-                       }
+                            DatePickerFragment dpFrag = new DatePickerFragment();
+                            dpFrag.show(getFragmentManager(), "Choose Date");
+
+                        }
+                        else
+                        {
+
+                        }
                     }
                 }
         );
-        FragmentManager fmanager = getFragmentManager();
-        FragmentTransaction transaction = fmanager.beginTransaction();
-        DatePickerFragment dpFrag = new DatePickerFragment();
-        transaction.add(FRAGMENT_ID, dpFrag);
-        transaction.commit();
+
 
 
     }
 
 
-
+    @Override
+    public void returnDate(String date)
+    {
+        purchaseDate.setText(date);
+        Log.w("<!!!Alan's Tag!!!>",date);
+    }
 }
