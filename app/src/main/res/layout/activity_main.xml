@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background = "#4da3ff">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -43,8 +41,68 @@
                 android:id="@+id/Price_EditText"
                 android:layout_weight="0.59"/>
         </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:text = "@string/date_text"
+                android:id="@+id/Date_TextView"/>
 
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:id="@+id/Date_EditText"/>
+            <RadioButton
+                android:id="@+id/rButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:text = "@string/date_text_current"
+                android:id="@+id/Date_TextView2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1">
 
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:text = "@string/category_text"
+                android:id="@+id/Category_TextView"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:id="@+id/Category_EditText"
+                android:layout_weight="0.59"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:text = "@string/audio_note_text"
+                android:id="@+id/Audio_Note_TextView"/>
+
+        </LinearLayout>
+
+       <LinearLayout
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:weightSum="1">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +114,6 @@
             android:layout_height="wrap_content"
             android:text="@string/display_button_text"
             android:id="@+id/display_button"/>
-
+       </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+

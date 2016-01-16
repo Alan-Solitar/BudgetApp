@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.content.Context;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+
 
 /**
  * Created by BurstLinker 2 on 2015/12/24.
@@ -35,10 +38,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position)
     {
+        //give purchase meta data to the viewholder
         Purchase current = purchases.get(position);
         holder.name.setText(current.getName());
-        holder.price.setText(Float.toString(current.getPrice()));
-        holder.date.setText(Long.toString(current.getDate()));
+        holder.price.setText('$'+Float.toString(current.getPrice()));
+        holder.date.setText(current.getFormattedDate());
     }
 
     @Override
@@ -63,5 +67,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
 
         }
     }
+
 
 }

@@ -1,5 +1,7 @@
 package com.burstlinker.budget;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity
@@ -16,7 +19,9 @@ public class MainActivity extends AppCompatActivity
     Button displayButton;
     EditText purchaseName;
     EditText purchasePrice;
-    EditText purchaseDate;
+    EditText purchasDate;
+    RadioButton rButton;
+    int FRAGMENT_ID = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,8 +56,7 @@ public class MainActivity extends AppCompatActivity
                            try
                            {
                                purchase.setPrice(Float.parseFloat(purchasePrice.getText().toString()));
-                           }
-                           catch(NumberFormatException error)
+                           } catch (NumberFormatException error)
                            {
                                purchasePrice.setText("Number format exception");
                            }
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -113,5 +118,35 @@ public class MainActivity extends AppCompatActivity
         else
             return false;
     }
+    private void displayPicker()
+    {
+        //get id of Radio Button
+        rButton = (RadioButton)findViewById(R.id.rButton);
+
+        //If checked, use current date.
+        //If not checked, launch datepicker fragment
+        rButton.setOnClickListener(
+                new Button.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                       if(rButton.isChecked())
+                       {
+
+                       }
+                    }
+                }
+        );
+        FragmentManager fmanager = getFragmentManager();
+        FragmentTransaction transaction = fmanager.beginTransaction();
+        DatePickerFragment dpFrag = new DatePickerFragment();
+        transaction.add(FRAGMENT_ID, dpFrag);
+        transaction.commit();
+
+
+    }
+
+
 
 }
