@@ -1,3 +1,6 @@
+/**
+ * Created by BurstLinker 2 on 2015/11/26.
+ */
 package com.burstlinker.budget;
 
 import android.content.Context;
@@ -8,9 +11,7 @@ import android.database.Cursor;
 
 import java.util.ArrayList;
 
-/**
- * Created by BurstLinker 2 on 2015/11/26.
- */
+
 public class DBHandler extends SQLiteOpenHelper
 {
     private static final String DATABASE_NAME = "budget.db";

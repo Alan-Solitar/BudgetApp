@@ -1,8 +1,9 @@
 package com.burstlinker.budget;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
- * Created by BurstLinker 2 on 2015/11/28.
+ * Created by Alan Solitar on 2015/11/28.
  */
 public class Purchase
 {
