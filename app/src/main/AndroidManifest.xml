@@ -21,5 +21,7 @@
             android:label="@string/title_activity_data_display" >
         </activity>
     </application>
+    <uses-permission android:name="android.permission.write_external_storage"></uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
 
 </manifest>
