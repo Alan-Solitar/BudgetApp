@@ -31,11 +31,8 @@ public class AudioFragment extends Fragment
     private Button startStopRecordButton=null;
     private MediaRecorder mrecorder = null;
 
-
-
-
-
-
+    private boolean isRecording;
+    private boolean isPlaying;
 
     private void onRecord(boolean recording)
     {
@@ -72,7 +69,8 @@ public class AudioFragment extends Fragment
     }
     private void stopRecording()
     {
-        
+        mrecorder.release();
+        mrecorder = null;
     }
 
 
@@ -104,6 +102,53 @@ public class AudioFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         int layoutID = R.layout.audio;
-       return inflater.inflate(layoutID, container, false);
+        View view = inflater.inflate(layoutID,container,false);
+        playStopButton = (Button)view.findViewById(R.id.play_button);
+        startStopRecordButton = (Button)view.findViewById(R.id.record_button);
+        setListeners();
+        return view;
     }
+    private void setListeners()
+    {
+        isPlaying=false;
+        isRecording=false;
+        playStopButton.setOnClickListener(
+                new Button.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        onPlay(isPlaying);
+
+                        //update text of the button
+                        if(!isPlaying)
+                            playStopButton.setText(R.string.stop_text);
+                        else
+                        {
+                            playStopButton.setText(R.string.play_text);
+                        }
+
+                        isPlaying = !isPlaying;
+                    }
+                }
+        );
+        startStopRecordButton.setOnClickListener(
+                new Button.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        onRecord(isRecording);
+                        if(!isRecording)
+                        startStopRecordButton.setText(R.string.stop_text);
+                        else
+                        {
+                            startStopRecordButton.setText(R.string.record_text);
+                        }
+                        isRecording=!isRecording;
+                    }
+                }
+        );
+    }
+
 }
