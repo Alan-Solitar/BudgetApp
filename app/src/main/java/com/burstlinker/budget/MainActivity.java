@@ -14,7 +14,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.content.Intent;
 
-public class MainActivity extends AppCompatActivity implements DatePickerFragment.TheListener
+public class MainActivity extends AppCompatActivity
+        implements DatePickerFragment.TheListener,
+        AudioFragment.TheListener
 {
     DBHandler db;
     Button enterButton;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
     EditText purchasePrice;
     EditText purchaseDate;
     CheckBox dateCBox, NoteCBox;
+    String note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
         setContentView(R.layout.activity_main);
         db = new DBHandler(this,null,null,1);
 
+        note= "";
         //widgets
         enterButton = (Button) findViewById(R.id.enter_button);
         displayButton = (Button) findViewById(R.id.display_button);
@@ -72,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
                            //clear both fields
                            purchaseName.setText("");
                            purchasePrice.setText("");
+                           if(note!="")
+                           {
+                               purchase.setNotePath(note);
+                           }
                        }
                    }
                }
@@ -176,4 +184,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
         purchaseDate.setText(date);
         Log.w("<!!!Alan's Tag!!!>",date);
     }
+    @Override
+    public void returnFile(String file)
+    {
+        note=file;
+    }
+
+
 }

@@ -17,8 +17,16 @@ import java.io.IOException;
 /**
  * Created by Alan Solitar on 2016/01/16.
  */
+
 public class AudioFragment extends Fragment
 {
+    TheListener listener;
+
+    //interface to return recorded files to an activity/fragment
+    public interface TheListener
+    {
+        public void returnFile(String file);
+    }
     private FileHandler generator=null;
     private static final String TAG = "AUDIO_TEST";
     private static String fileName ="";
@@ -75,6 +83,8 @@ public class AudioFragment extends Fragment
         {
             Log.e("Recorder_Test","Error");
         }
+        if(listener!=null)
+            listener.returnFile(fileName);
 
     }
     private void stopRecording()
@@ -119,6 +129,7 @@ public class AudioFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        listener = (TheListener)getActivity();
         int layoutID = R.layout.audio;
         generator = new FileHandler(getActivity().getApplicationContext());
         View view = inflater.inflate(layoutID,container,false);
