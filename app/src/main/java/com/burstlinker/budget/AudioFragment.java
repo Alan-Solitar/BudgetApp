@@ -2,15 +2,15 @@ package com.burstlinker.budget;
 import android.app.Fragment;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.media.MediaRecorder;
 import android.media.MediaPlayer;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 
@@ -19,10 +19,9 @@ import java.io.IOException;
  */
 public class AudioFragment extends Fragment
 {
-    private FileNameGenerator generator=null;
+    private FileHandler generator=null;
     private static final String TAG = "AUDIO_TEST";
     private static String fileName ="";
-
     //Audio Playback related
     private Button playStopButton=null;
     private MediaPlayer mplayer = null;
@@ -33,6 +32,7 @@ public class AudioFragment extends Fragment
 
     private boolean isRecording;
     private boolean isPlaying;
+
 
     private void onRecord(boolean recording)
     {
@@ -60,11 +60,21 @@ public class AudioFragment extends Fragment
     private void startRecording()
     {
         mrecorder = new MediaRecorder();
+        mrecorder.reset();
         mrecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mrecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        fileName=generator.generateName();
+        fileName=generator.getSavedfile("3pg");
         mrecorder.setOutputFile(fileName);
         mrecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+       try
+       {
+           mrecorder.prepare();
+           mrecorder.start();
+       }
+       catch(Exception e)
+        {
+            Log.e("Recorder_Test","Error");
+        }
 
     }
     private void stopRecording()
@@ -78,6 +88,14 @@ public class AudioFragment extends Fragment
 
     private void startPlayback()
     {
+        try
+        {
+            FileInputStream stream = new FileInputStream(fileName);
+        }
+        catch(Exception e)
+        {
+            Log.e("Stream error", "could not find file");
+        }
         mplayer = new MediaPlayer();
         try
         {
@@ -87,7 +105,7 @@ public class AudioFragment extends Fragment
         }
         catch(IOException error)
         {
-            Log.e(TAG,"Prepare failed");
+            Log.e(TAG,"Prepare failed" +" " + fileName);
         }
     }
     private void stopPlayback()
@@ -102,6 +120,7 @@ public class AudioFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         int layoutID = R.layout.audio;
+        generator = new FileHandler(getActivity().getApplicationContext());
         View view = inflater.inflate(layoutID,container,false);
         playStopButton = (Button)view.findViewById(R.id.play_button);
         startStopRecordButton = (Button)view.findViewById(R.id.record_button);

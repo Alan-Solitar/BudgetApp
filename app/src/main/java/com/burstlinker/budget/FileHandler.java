@@ -27,9 +27,9 @@ public class FileHandler
         String fileName = randID.toString();
         return fileName;
     }
-    public String getSavedfile()
+    public String getSavedfile(String extension)
     {
-        String fileName = generateName();
+        String fileName = generateName()+ "." +extension;
         String fullFilename="";
         //We first need to check whether or not external storage exists
         String state = "";
