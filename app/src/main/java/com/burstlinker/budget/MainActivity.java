@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity implements DatePickerFragment.TheListener
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
     EditText purchaseName;
     EditText purchasePrice;
     EditText purchaseDate;
-    CheckBox cBox;
+    CheckBox dateCBox, NoteCBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,12 +68,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
                            //clear both fields
                            purchaseName.setText("");
                            purchasePrice.setText("");
-
                        }
                    }
                }
        );
-
     }
     public void displayData()
     {
@@ -122,39 +119,51 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
         else
             return false;
     }
+
+    //code to handle display of date picker
     private void displayPicker()
     {
         //get id of CheckBox
-        cBox = (CheckBox)findViewById(R.id.cBox);
+        dateCBox = (CheckBox)findViewById(R.id.cBox);
 
         //If checked, use current date.
         //If not checked, launch datepicker fragment
-        cBox.setOnClickListener(
+        dateCBox.setOnClickListener(
                 new CheckBox.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
                     {
-                        if (!cBox.isChecked())
+                        if (!dateCBox.isChecked())
                         {
-
                             DatePickerFragment dpFrag = new DatePickerFragment();
                             dpFrag.show(getFragmentManager(), "Choose Date");
-
-                        }
-                        else
-                        {
-
                         }
                     }
                 }
         );
-
-
-
     }
 
+    void recordNote()
+    {
+        NoteCBox.setOnClickListener(
+                new CheckBox.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        if (NoteCBox.isChecked())
+                        {
+                            DatePickerFragment dpFrag = new DatePickerFragment();
+                            dpFrag.show(getFragmentManager(), "Choose Date");
+                        }
+                    }
+                }
+        );
+    }
 
+    //This is from the listener interface that must be implemented
+    //This callback allows an activity to receive data from a fragment
     @Override
     public void returnDate(String date)
     {

@@ -5,7 +5,7 @@
     <string name = "name_text">Item Name</string>
     <string name = "price_text">Price</string>
     <string name = "category_text">Category</string>
-    <string name = "audio_note_text">Audio Note</string>
+    <string name = "audio_note_text">Record Note?</string>
     <string name = "date_text">Date</string>
     <string name = "date_text_current">Use Today\'s Date</string>
     <string name = "action_settings">Settings</string>
@@ -15,6 +15,11 @@
     <string name = "date_format">yyyy-MM-dd</string>
     <string name = "hello_world">Hello world!</string>
     <string name = "dummy_text">Dummy Text</string>
+    <!--Audio strings-->
+    <string name = "play_text">play</string>
+    <string name = "stop_text">stop</string>
+    <string name = "record_text">rec</string>
+
 
     <!-- String Arrays-->
     <string-array name="category_array">

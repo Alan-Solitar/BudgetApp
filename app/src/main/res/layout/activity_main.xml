@@ -93,6 +93,15 @@
                 android:layout_height="wrap_content"
                 android:text = "@string/audio_note_text"
                 android:id="@+id/Audio_Note_TextView"/>
+            <CheckBox
+                android:id="@+id/audio_cBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+            </FrameLayout>
 
         </LinearLayout>
 

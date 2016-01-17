@@ -19,6 +19,7 @@ import java.io.IOException;
  */
 public class AudioFragment extends Fragment
 {
+    private FileNameGenerator generator=null;
     private static final String TAG = "AUDIO_TEST";
     private static String fileName ="";
 
@@ -29,6 +30,12 @@ public class AudioFragment extends Fragment
     //Audio Capture related
     private Button startStopRecordButton=null;
     private MediaRecorder mrecorder = null;
+
+
+
+
+
+
 
     private void onRecord(boolean recording)
     {
@@ -58,9 +65,16 @@ public class AudioFragment extends Fragment
         mrecorder = new MediaRecorder();
         mrecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mrecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mrecorder.setOutputFile(mFileName);
-        mrecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        fileName=generator.generateName();
+        mrecorder.setOutputFile(fileName);
+        mrecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
     }
+    private void stopRecording()
+    {
+        
+    }
+
 
 
 
@@ -86,12 +100,10 @@ public class AudioFragment extends Fragment
     }
 
 
-
-
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        int layoutID = R.layout.audio;
+       return inflater.inflate(layoutID, container, false);
     }
 }
