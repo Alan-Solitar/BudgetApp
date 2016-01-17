@@ -1,6 +1,8 @@
 package com.burstlinker.budget;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,11 +37,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
         purchaseName = (EditText)findViewById(R.id.Item_EditText);
         purchasePrice = (EditText)findViewById(R.id.Price_EditText);
         purchaseDate = (EditText)findViewById(R.id.Date_EditText);
-
+        dateCBox = (CheckBox)findViewById(R.id.cBox);
+        NoteCBox= (CheckBox)findViewById(R.id.audio_cBox);
         //Methods that correspond to various clicks
         insertData();
         displayData();
         displayPicker();
+        recordNote();
     }
 
     public void insertData()
@@ -123,8 +127,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
     //code to handle display of date picker
     private void displayPicker()
     {
-        //get id of CheckBox
-        dateCBox = (CheckBox)findViewById(R.id.cBox);
 
         //If checked, use current date.
         //If not checked, launch datepicker fragment
@@ -154,8 +156,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
                     {
                         if (NoteCBox.isChecked())
                         {
-                            DatePickerFragment dpFrag = new DatePickerFragment();
-                            dpFrag.show(getFragmentManager(), "Choose Date");
+                            Fragment audiofrag= new AudioFragment();
+                            //set args
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.add(R.id.fragment_container,audiofrag);
+                            transaction.commit();
+
                         }
                     }
                 }
