@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -66,7 +67,7 @@ public class DBHandler extends SQLiteOpenHelper
         //I am storing the name of of the enum, not the int value
         contentValues.put(COL_6, purchase.getCategory().name());
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(PURCHASE_TABLE,null, contentValues);
+        db.insert(PURCHASE_TABLE, null, contentValues);
         db.close();
         return true;
     }
@@ -78,6 +79,47 @@ public class DBHandler extends SQLiteOpenHelper
         db.close();
         return true;
     }
+    public float getAverage()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT AVG("+COL_3+ ") FROM "+ PURCHASE_TABLE;
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor!=null)
+        {
+            cursor.moveToLast();
+        }
+        float avg = cursor.getFloat(0);
+        Log.e("Alan's tag", Float.toString(avg));
+        return avg;
+    }
+    public float getSum()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT SUM("+COL_3+ ") FROM "+ PURCHASE_TABLE;
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor!=null)
+        {
+            cursor.moveToLast();
+        }
+        float sum = cursor.getFloat(0);
+        Log.e("Alan's tag",Float.toString(sum));
+        return sum;
+    }
+    public String getMode()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        String query =
+        "SELECT + " +COL_6+
+        " FROM "+ PURCHASE_TABLE +
+        " WHERE "+COL_3 +" = (SELECT MAX( " + COL_3 + ") FROM " + PURCHASE_TABLE +")";
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToLast();
+        String mode = cursor.getString(0);
+        Log.e("Alan's tag",mode);
+        return mode;
+    }
+
+
     public ArrayList<Purchase> getRecords()
     {
         ArrayList<Purchase> purchases = new ArrayList<Purchase>();

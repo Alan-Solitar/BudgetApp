@@ -19,6 +19,10 @@
     <string name = "play_text">play</string>
     <string name = "stop_text">stop</string>
     <string name = "record_text">rec</string>
+    <!--Audio strings-->
+    <string name = "total_text">Total Spent</string>
+    <string name = "avg_text">Average Price</string>
+    <string name = "mode_text">Most Expensive Category</string>
 
 
     <!-- String Arrays-->
