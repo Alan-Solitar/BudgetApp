@@ -32,7 +32,7 @@ public class DataDisplay extends AppCompatActivity
 
 
 
-        adapter = new MyAdapter(purchases);
+        adapter = new MyAdapter(purchases,this);
         recycle.setAdapter(adapter);
 
     }

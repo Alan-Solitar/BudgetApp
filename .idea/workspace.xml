@@ -9,18 +9,10 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="577c3694-fdf5-4df4-9f04-5392db9d3f9d" name="Default" comment="Added fileHandler class&#10;&#10;-This class handles generating file names and saving them to external storage. It also performs the necessary checks to ensrue that saving is a possiblity.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AllTimeFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+    <list default="true" id="577c3694-fdf5-4df4-9f04-5392db9d3f9d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AudioFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AudioFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DBHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DBHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DataDisplay.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DataDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MyAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MyAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/Purchase.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/Purchase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/purchase.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/purchase.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Budget.iws" />
@@ -86,7 +78,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DataDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -95,8 +87,8 @@
       <file leaf-file-name="MyAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MyAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state vertical-scroll-proportion="-16.172413">
+              <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -105,17 +97,17 @@
       <file leaf-file-name="AudioFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AudioFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.413793">
-              <caret line="125" column="27" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
+            <state vertical-scroll-proportion="68.13793">
+              <caret line="101" column="36" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBHandler.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DBHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DBHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.88990825">
+            <state vertical-scroll-proportion="0.0">
               <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
               <folding />
             </state>
@@ -135,11 +127,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.756757">
-              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state vertical-scroll-proportion="7.2901134">
+              <caret line="173" column="39" selection-start-line="173" selection-start-column="39" selection-end-line="173" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -1615,12 +1607,12 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AllTimeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/purchase.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DataDisplay.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/Purchase.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MyAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AudioFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DBHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DataDisplay.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AudioFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MyAdapter.java" />
       </list>
     </option>
   </component>
@@ -1975,7 +1967,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453073666804</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="A few layout changes and fixes to code spacing&#10;&#10;- Made changes to the layout for purchase view displayed in the recycler view - added a play note button">
+      <created>1453088981128</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1453088981129</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1998,7 +1996,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3307164" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2468017" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.086886995" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -2019,11 +2017,20 @@
     <MESSAGE value="Added fileHandler class&#10;&#10;-This class handles generating file names and saving them to external storage. It also performs the necessary checks to ensrue that saving is a possiblity." />
     <MESSAGE value="Made changes such that recording and playback of audio files now works :)&#10;&#10;1.  Added proper extension to audio files&#10;2..  Added in lines that I either forgot or accidentally deleted :&#10;&#10;-mRecorder.prepare()&#10;-mRecorder.start()" />
     <MESSAGE value="Implemented interface for callback&#10;&#10;Interface allows me to get the audio file generated in the AudioFragment&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented interface for callback&#10;&#10;Interface allows me to get the audio file generated in the AudioFragment&#10;" />
+    <MESSAGE value="A few layout changes and fixes to code spacing&#10;&#10;- Made changes to the layout for purchase view displayed in the recycler view - added a play note button" />
+    <option name="LAST_COMMIT_MESSAGE" value="A few layout changes and fixes to code spacing&#10;&#10;- Made changes to the layout for purchase view displayed in the recycler view - added a play note button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AudioFragment.java</url>
+          <line>102</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2090,22 +2097,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DataDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MyAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.333334">
@@ -2125,26 +2116,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DBHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DataDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/AudioFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.413793">
-          <caret line="125" column="27" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
+        <state vertical-scroll-proportion="68.13793">
+          <caret line="101" column="36" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MyAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.172413">
+          <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.756757">
-          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/burstlinker/budget/DBHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.88990825">
-          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+        <state vertical-scroll-proportion="7.2901134">
+          <caret line="173" column="39" selection-start-line="173" selection-start-column="39" selection-end-line="173" selection-end-column="39" />
           <folding />
         </state>
       </provider>

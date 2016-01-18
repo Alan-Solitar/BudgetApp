@@ -59,7 +59,7 @@ public class AudioFragment extends Fragment
     }
     private void onPlay(boolean playing)
     {
-        if(!playing)
+        if(!playing & fileName!="")
         {
             startPlayback();
         }

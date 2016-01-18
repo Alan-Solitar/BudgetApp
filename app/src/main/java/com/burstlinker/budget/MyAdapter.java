@@ -1,4 +1,7 @@
 package com.burstlinker.budget;
+import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,8 +19,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
 {
     private LayoutInflater inflater=null;
     private List<Purchase> purchases;
-    public MyAdapter(ArrayList<Purchase> dataSet)
+    Context context;
+    public MyAdapter(ArrayList<Purchase> dataSet, Context context)
     {
+        this.context=context;
         purchases = dataSet;
     }
 
@@ -47,13 +52,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
                     public void onClick(View v)
                     {
                         //new audiofrag
-                        AudioFragment frag = new AudioFragment();
-                        //create a bundle for including args
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("mode", AudioFragment.MODE.PLAY);
-                        bundle.putString("file",fileName );
-                        //set args
-                        frag.setArguments(bundle);
+                        if(fileName!="")
+                        {
+                            AudioFragment frag = new AudioFragment();
+                            //create a bundle for including args
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("mode", AudioFragment.MODE.PLAY);
+                            bundle.putString("file", fileName);
+                            //set args
+                            frag.setArguments(bundle);
+                            FragmentTransaction transaction = ((Activity) context).getFragmentManager().beginTransaction();
+                            transaction.add(frag, "headless");
+                            transaction.commit();
+                        }
                     }
                 }
         );
