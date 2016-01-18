@@ -1,7 +1,6 @@
 package com.burstlinker.budget;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,12 +12,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.content.Intent;
+import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity
         implements DatePickerFragment.TheListener,
         AudioFragment.TheListener
 {
     DBHandler db;
+    Spinner catSpinner;
     Button enterButton;
     Button displayButton;
     EditText purchaseName;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         purchaseDate = (EditText)findViewById(R.id.Date_EditText);
         dateCBox = (CheckBox)findViewById(R.id.cBox);
         NoteCBox= (CheckBox)findViewById(R.id.audio_cBox);
+        catSpinner = (Spinner)findViewById(R.id.cat_spinner);
         //Methods that correspond to various clicks
         insertData();
         displayData();
@@ -72,14 +74,17 @@ public class MainActivity extends AppCompatActivity
                                purchasePrice.setText("Number format exception");
                            }
                            purchase.setDate(); //timestamp using epoch time
-                           db.addRecord(purchase);
-                           //clear both fields
-                           purchaseName.setText("");
-                           purchasePrice.setText("");
+
                            if(note!="")
                            {
                                purchase.setNotePath(note);
                            }
+                           purchase.setCategory(catSpinner.getSelectedItem().toString());
+                           db.addRecord(purchase);
+                           //clear both fields
+                           purchaseName.setText("");
+                           purchasePrice.setText("");
+
                        }
                    }
                }
@@ -99,8 +104,6 @@ public class MainActivity extends AppCompatActivity
                }
        );
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -166,6 +169,9 @@ public class MainActivity extends AppCompatActivity
                         {
                             Fragment audiofrag= new AudioFragment();
                             //set args
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("mode",AudioFragment.MODE.PLAY_AND_RECORD);
+                            audiofrag.setArguments(bundle);
                             FragmentTransaction transaction = getFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_container,audiofrag);
                             transaction.commit();

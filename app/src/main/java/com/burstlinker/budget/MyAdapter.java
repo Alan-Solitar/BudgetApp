@@ -1,18 +1,13 @@
 package com.burstlinker.budget;
-
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.content.Context;
+import android.widget.Button;
 import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-
 
 /**
  * Created by Alan Solitar on 2015/12/24.
@@ -43,6 +38,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
         holder.name.setText(current.getName());
         holder.price.setText('$'+Float.toString(current.getPrice()));
         holder.date.setText(current.getFormattedDate());
+        holder.category.setText(current.getCategory().toString());
+        final String fileName = current.getNotePath();
+        holder.note.setOnClickListener(
+                new Button.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        //new audiofrag
+                        AudioFragment frag = new AudioFragment();
+                        //create a bundle for including args
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("mode", AudioFragment.MODE.PLAY);
+                        bundle.putString("file",fileName );
+                        //set args
+                        frag.setArguments(bundle);
+                    }
+                }
+        );
     }
 
     @Override
@@ -56,7 +70,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
         public TextView name;
         public TextView price;
         public TextView date;
-
+        public TextView category;
+        public Button note;
 
         public ViewHolder(View itemView)
         {
@@ -64,7 +79,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
             name = (TextView)itemView.findViewById(R.id.purchase_name);
             price = (TextView)itemView.findViewById(R.id.purchase_price);
             date = (TextView)itemView.findViewById(R.id.purchase_date);
-
+            category = (TextView)itemView.findViewById(R.id.purchase_cat);
+            note = (Button)itemView.findViewById(R.id.p_button);
         }
     }
 

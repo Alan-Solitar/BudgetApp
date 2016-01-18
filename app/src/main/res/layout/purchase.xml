@@ -6,18 +6,37 @@
               android:layout_height="match_parent"
               android:weightSum="1"
               android:background="#83BACC">
+
+    <LinearLayout
+        android:id="@+id/purchase_horizontal1"
+        android:orientation="horizontal"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.04">
+    <TextView
+        android:id="@+id/purchase_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginRight="50dp"
+        android:text = "@string/dummy_text"/>
+
     <TextView
         android:id="@+id/purchase_price"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text = "@string/dummy_text"/>
-
+</LinearLayout>
     <LinearLayout
-        android:id="@+id/purchase_horizontal"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/purchase_vertical1"
         android:orientation="vertical"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.24">
+        android:layout_weight="0.04">
+
         <TextView
             android:id="@+id/purchase_name"
             android:layout_width="wrap_content"
@@ -28,6 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "@string/dummy_text"/>
-
     </LinearLayout>
-</LinearLayout>
+        <Button
+            android:id="@+id/p_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/play_text"></Button>
+    </LinearLayout>
+    </LinearLayout>

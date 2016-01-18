@@ -30,16 +30,8 @@ public class DataDisplay extends AppCompatActivity
         myLayoutManager = new LinearLayoutManager(this);
         recycle.setLayoutManager(myLayoutManager);
 
-/*
-        //test data
-        Purchase p = new Purchase();
-        p.setName("item1");
-        float d = 5.4f;
-        p.setPrice(d);
-        p.setDate();
-        ArrayList<Purchase> purchases = new ArrayList<Purchase>();
-        purchases.add(p);
-        */
+
+
         adapter = new MyAdapter(purchases);
         recycle.setAdapter(adapter);
 

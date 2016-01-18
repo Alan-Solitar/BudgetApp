@@ -79,7 +79,7 @@
                 android:background="#99ff99"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/Category_EditText"
+                android:id="@+id/cat_spinner"
                 android:entries="@array/category_array"
                 android:layout_weight="0.59"/>
         </LinearLayout>

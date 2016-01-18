@@ -24,10 +24,10 @@
     <!-- String Arrays-->
     <string-array name="category_array">
         <item>FOOD</item>
-        <item>Family</item>
-        <item>Health</item>
-        <item>Leisure</item>
-        <item>Transportation</item>
-        <item>Job/Education</item>
+        <item>FAMILY</item>
+        <item>HEALTH</item>
+        <item>LEISURE</item>
+        <item>TRANSPORTATION</item>
+        <item>EDUCATION</item>
     </string-array>
 </resources>

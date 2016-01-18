@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.media.MediaPlayer;
-
-import java.io.FileInputStream;
 import java.io.IOException;
 
 
@@ -40,7 +38,13 @@ public class AudioFragment extends Fragment
 
     private boolean isRecording;
     private boolean isPlaying;
+    MODE mode;
 
+    //This enum will determine whether this fragment will run headless or inflate a UI
+    public enum MODE
+    {
+        PLAY,PLAY_AND_RECORD,HEADLESS;
+    }
 
     private void onRecord(boolean recording)
     {
@@ -83,29 +87,18 @@ public class AudioFragment extends Fragment
         {
             Log.e("Recorder_Test","Error");
         }
-        if(listener!=null)
-            listener.returnFile(fileName);
-
     }
     private void stopRecording()
     {
         mrecorder.release();
         mrecorder = null;
+        if(listener!=null)
+            listener.returnFile(fileName);
     }
-
-
-
 
     private void startPlayback()
     {
-        try
-        {
-            FileInputStream stream = new FileInputStream(fileName);
-        }
-        catch(Exception e)
-        {
-            Log.e("Stream error", "could not find file");
-        }
+
         mplayer = new MediaPlayer();
         try
         {
@@ -124,24 +117,77 @@ public class AudioFragment extends Fragment
         mplayer.release();
         mplayer=null;
     }
+    @Override
+    public void onCreate(Bundle bund)
+    {
+        super.onCreate(bund);
+        Bundle bundle = this.getArguments();
+        mode = (MODE)bundle.getSerializable("mode");
+        if(mode==MODE.PLAY)
+        {
+            fileName = bundle.getString("file");
+        }
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        listener = (TheListener)getActivity();
-        int layoutID = R.layout.audio;
-        generator = new FileHandler(getActivity().getApplicationContext());
-        View view = inflater.inflate(layoutID,container,false);
-        playStopButton = (Button)view.findViewById(R.id.play_button);
-        startStopRecordButton = (Button)view.findViewById(R.id.record_button);
-        setListeners();
+        View view=null;
+        if(mode==MODE.PLAY_AND_RECORD)
+        {
+            listener = (TheListener) getActivity();
+            int layoutID = R.layout.audio;
+            generator = new FileHandler(getActivity().getApplicationContext());
+            view = inflater.inflate(layoutID, container, false);
+            playStopButton = (Button) view.findViewById(R.id.play_button);
+            startStopRecordButton = (Button) view.findViewById(R.id.record_button);
+            playAndRecord();
+            return view;
+        }
+        else if(mode==MODE.PLAY)
+        {
+            onPlay(false);
+            return view;
+        }
+
         return view;
+
     }
-    private void setListeners()
+    private void playAndRecord()
+    {
+        playOnClick();
+        recordOnClick();
+
+    }
+    private void onlyPlay()
+    {
+        playOnClick();
+    }
+    public void recordOnClick()
+    {
+        isRecording = false;
+        startStopRecordButton.setOnClickListener(
+            new Button.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    onRecord(isRecording);
+                    if (!isRecording)
+                        startStopRecordButton.setText(R.string.stop_text);
+                    else
+                    {
+                        startStopRecordButton.setText(R.string.record_text);
+                    }
+                    isRecording = !isRecording;
+                }
+            }
+            );
+    }
+    public void playOnClick()
     {
         isPlaying=false;
-        isRecording=false;
         playStopButton.setOnClickListener(
                 new Button.OnClickListener()
                 {
@@ -151,7 +197,7 @@ public class AudioFragment extends Fragment
                         onPlay(isPlaying);
 
                         //update text of the button
-                        if(!isPlaying)
+                        if (!isPlaying)
                             playStopButton.setText(R.string.stop_text);
                         else
                         {
@@ -162,23 +208,7 @@ public class AudioFragment extends Fragment
                     }
                 }
         );
-        startStopRecordButton.setOnClickListener(
-                new Button.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        onRecord(isRecording);
-                        if(!isRecording)
-                        startStopRecordButton.setText(R.string.stop_text);
-                        else
-                        {
-                            startStopRecordButton.setText(R.string.record_text);
-                        }
-                        isRecording=!isRecording;
-                    }
-                }
-        );
     }
-
 }
+
+

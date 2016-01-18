@@ -9,9 +9,8 @@ public class Purchase
 {
     public enum CATEGORY
     {
-        FOOD,FAMILY,HEALTH, LEISURE,TRANSPORTATION
+        FOOD,FAMILY,HEALTH, LEISURE,TRANSPORTATION,EDUCATION
     }
-
 
     private int ID;
     private String name;
@@ -87,7 +86,6 @@ public class Purchase
         String formattedDate = format.format(d);
         return formattedDate;
     }
-
 
     public void setDate()
     {
