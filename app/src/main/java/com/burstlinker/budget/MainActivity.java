@@ -2,6 +2,9 @@ package com.burstlinker.budget;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.content.Intent;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements DatePickerFragment.TheListener,
@@ -22,11 +29,14 @@ public class MainActivity extends AppCompatActivity
     Spinner catSpinner;
     Button enterButton;
     Button displayButton;
+    Button statButton;
     EditText purchaseName;
     EditText purchasePrice;
     EditText purchaseDate;
     CheckBox dateCBox, NoteCBox;
     String note;
+    Fragment audiofrag;
+    Button connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,6 +49,8 @@ public class MainActivity extends AppCompatActivity
         //widgets
         enterButton = (Button) findViewById(R.id.enter_button);
         displayButton = (Button) findViewById(R.id.display_button);
+        statButton = (Button)findViewById(R.id.stat_button);
+        connect = (Button)findViewById(R.id.connect_button);
         purchaseName = (EditText)findViewById(R.id.Item_EditText);
         purchasePrice = (EditText)findViewById(R.id.Price_EditText);
         purchaseDate = (EditText)findViewById(R.id.Date_EditText);
@@ -46,10 +58,28 @@ public class MainActivity extends AppCompatActivity
         NoteCBox= (CheckBox)findViewById(R.id.audio_cBox);
         catSpinner = (Spinner)findViewById(R.id.cat_spinner);
         //Methods that correspond to various clicks
+        networkClick();
         insertData();
         displayData();
+        displayStats();
         displayPicker();
         recordNote();
+
+    }
+
+    public void displayStats()
+    {
+        statButton.setOnClickListener(
+                new Button.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Intent go_displayStats = new Intent(MainActivity.this,StatisticsActivity.class);
+                        startActivity(go_displayStats);
+                    }
+                }
+        );
     }
 
     public void insertData()
@@ -73,8 +103,26 @@ public class MainActivity extends AppCompatActivity
                            {
                                purchasePrice.setText("Number format exception");
                            }
-                           purchase.setDate(); //timestamp using epoch time
+                           if(isEmpty(purchaseDate))
+                               purchase.setDate(); //timestamp using epoch time
+                           else
+                           {
+                               Date date;
+                               SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                               try {
+                                   date = sdf.parse(purchaseDate.getText().toString());
+                                   purchase.setDate(date.getTime());
+                               }
+                               catch(Exception e)
+                               {
 
+                               }
+                               //reset views
+                               purchaseDate.setText("");
+                               dateCBox.setChecked(true);
+                               NoteCBox.performClick();
+
+                           }
                            if(note!="")
                            {
                                purchase.setNotePath(note);
@@ -141,6 +189,8 @@ public class MainActivity extends AppCompatActivity
 
         //If checked, use current date.
         //If not checked, launch datepicker fragment
+
+
         dateCBox.setOnClickListener(
                 new CheckBox.OnClickListener()
                 {
@@ -155,6 +205,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
         );
+
     }
 
     void recordNote()
@@ -167,7 +218,7 @@ public class MainActivity extends AppCompatActivity
                     {
                         if (NoteCBox.isChecked())
                         {
-                            Fragment audiofrag= new AudioFragment();
+                            audiofrag= new AudioFragment();
                             //set args
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("mode",AudioFragment.MODE.PLAY_AND_RECORD);
@@ -176,6 +227,11 @@ public class MainActivity extends AppCompatActivity
                             transaction.add(R.id.fragment_container,audiofrag);
                             transaction.commit();
 
+                        }
+
+                        else
+                        {
+                            getFragmentManager().beginTransaction().remove(audiofrag).commit();
                         }
                     }
                 }
@@ -188,12 +244,36 @@ public class MainActivity extends AppCompatActivity
     public void returnDate(String date)
     {
         purchaseDate.setText(date);
-        Log.w("<!!!Alan's Tag!!!>",date);
+        Log.w("<!!!Alan's Tag!!!>", date);
     }
     @Override
     public void returnFile(String file)
     {
         note=file;
+    }
+
+    //Check network connection - I am including this because I want to use extend my app in the future
+    //to upload user data to a server
+    public void networkClick()
+    {
+
+        connect.setOnClickListener(
+                new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ConnectivityManager cmanager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                        NetworkInfo networkInfo = cmanager.getActiveNetworkInfo();
+                        if (networkInfo != null && networkInfo.isConnected())
+                        {
+                            Toast.makeText( getApplicationContext(),"Connection is good to go", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please check your internet connection", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                }
+        );
+
     }
 
 

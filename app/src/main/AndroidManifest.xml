@@ -20,9 +20,14 @@
             android:name=".DataDisplay"
             android:label="@string/title_activity_data_display" >
         </activity>
+        <activity android:name=".StatisticsActivity"
+            android:label= "@string/title_activity_stat_display">
+        </activity>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
 
 </manifest>

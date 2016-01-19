@@ -1,6 +1,12 @@
 <resources>
 
     <!-- Strings -->
+
+
+
+    <!--Titles -->
+    <string name = "title_activity_data_display">Data Display</string>
+    <string name = "title_activity_stat_display">Stats</string>
     <string name = "app_name">Budget</string>
     <string name = "name_text">Item Name</string>
     <string name = "price_text">Price</string>
@@ -11,7 +17,8 @@
     <string name = "action_settings">Settings</string>
     <string name = "enter_button_text">Enter</string>
     <string name = "display_button_text">View</string>
-    <string name = "title_activity_data_display">DataDisplay</string>
+    <string name = "stat_button_text">Stats</string>
+    <string name = "network_button_text">connect</string>
     <string name = "date_format">yyyy-MM-dd</string>
     <string name = "hello_world">Hello world!</string>
     <string name = "dummy_text">Dummy Text</string>
@@ -22,7 +29,7 @@
     <!--Audio strings-->
     <string name = "total_text">Total Spent</string>
     <string name = "avg_text">Average Price</string>
-    <string name = "mode_text">Most Expensive Category</string>
+    <string name = "mode_text">Top category</string>
 
 
     <!-- String Arrays-->

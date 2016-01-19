@@ -122,6 +122,17 @@
             android:layout_height="wrap_content"
             android:text="@string/display_button_text"
             android:id="@+id/display_button"/>
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/stat_button"
+               android:text="@string/stat_button_text"/>
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text ="@string/network_button_text"
+               android:id="@+id/connect_button" />
        </LinearLayout>
     </LinearLayout>
 

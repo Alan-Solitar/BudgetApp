@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Alan Solitar on 2016/01/18.
  */
@@ -39,8 +41,13 @@ DBHandler db=null;
             avg = (TextView) view.findViewById(R.id.avg_value);
             mode = (TextView) view.findViewById(R.id.mode_value);
         }
-        sum.setText(Float.toString(db.getSum()));
-        avg.setText(Float.toString(db.getAverage()));
+
+    //we need to format this to dollars
+        DecimalFormat moneyFormat = new DecimalFormat("$0.00");
+
+
+        sum.setText(moneyFormat.format(db.getSum()));
+        avg.setText(moneyFormat.format(db.getAverage()));
         mode.setText(db.getMode());
 
         return view;

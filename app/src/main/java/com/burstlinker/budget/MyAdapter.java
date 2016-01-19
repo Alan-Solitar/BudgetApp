@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import java.util.List;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
 {
+    DecimalFormat moneyFormat;
     private LayoutInflater inflater=null;
     private List<Purchase> purchases;
     Context context;
@@ -29,6 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
+        moneyFormat= new DecimalFormat("$0.00");
         View view =LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.purchase, parent, false);
         ViewHolder holder = new ViewHolder(view);
@@ -38,10 +42,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position)
     {
+
+
         //give purchase meta data to the viewholder
         Purchase current = purchases.get(position);
         holder.name.setText(current.getName());
-        holder.price.setText('$'+Float.toString(current.getPrice()));
+        holder.price.setText(moneyFormat.format(current.getPrice()));
         holder.date.setText(current.getFormattedDate());
         holder.category.setText(current.getCategory().toString());
         final String fileName = current.getNotePath();
@@ -51,7 +57,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
                     @Override
                     public void onClick(View v)
                     {
-                        //new audiofrag
+                        //we need to make sure there is a file to play
                         if(fileName!="")
                         {
                             AudioFragment frag = new AudioFragment();

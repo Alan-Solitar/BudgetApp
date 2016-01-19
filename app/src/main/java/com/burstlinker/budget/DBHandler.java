@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class DBHandler extends SQLiteOpenHelper
@@ -118,7 +119,27 @@ public class DBHandler extends SQLiteOpenHelper
         Log.e("Alan's tag",mode);
         return mode;
     }
-
+    public HashMap<String,Integer> getCategoryOcurrences()
+    {
+        String cat;
+        int occurences;
+        HashMap<String,Integer> map = new HashMap<>();
+        String query = "SELECT "+COL_6 +", COUNT(*) FROM "+PURCHASE_TABLE +
+                " GROUP BY "+COL_6;
+        SQLiteDatabase db=getWritableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        while(cursor.moveToNext())
+        {
+            cat=cursor.getString(0);
+            occurences=cursor.getInt(1);
+            map.put(cat,occurences);
+        }
+        if(map==null)
+        {
+            Log.e("It's null","nullig");
+        }
+        return map;
+    }
 
     public ArrayList<Purchase> getRecords()
     {
