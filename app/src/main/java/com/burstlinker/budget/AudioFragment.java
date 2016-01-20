@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.media.MediaPlayer;
+import android.widget.Toast;
+
 import java.io.IOException;
 
 
@@ -59,13 +61,18 @@ public class AudioFragment extends Fragment
     }
     private void onPlay(boolean playing)
     {
-        if(!playing & fileName!="")
+        if(fileName!=null &&!fileName.isEmpty())
         {
-            startPlayback();
+            if (!playing )
+            {
+                startPlayback();
+            } else if (playing ) {
+                stopPlayback();
+            }
         }
         else
         {
-            stopPlayback();
+            Toast.makeText(this.getActivity(),"No audio file to play",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -100,22 +107,24 @@ public class AudioFragment extends Fragment
     {
 
         mplayer = new MediaPlayer();
-        try
-        {
-            mplayer.setDataSource(fileName);
-            mplayer.prepare();
-            mplayer.start();
-        }
-        catch(IOException error)
-        {
-            Log.e(TAG,"Prepare failed" +" " + fileName);
+        if(!fileName.isEmpty()) {
+            try {
+                mplayer.setDataSource(fileName);
+                mplayer.prepare();
+                mplayer.start();
+            } catch (IOException error) {
+                Log.e(TAG, "Prepare failed" + " " + fileName);
+            }
         }
     }
     private void stopPlayback()
     {
         //we no longer need the media player;
-        mplayer.release();
-        mplayer=null;
+        if(mplayer!=null)
+        {
+            mplayer.release();
+            mplayer = null;
+        }
     }
     @Override
     public void onCreate(Bundle bund)
@@ -127,6 +136,10 @@ public class AudioFragment extends Fragment
         {
             fileName = bundle.getString("file");
         }
+        else
+        {
+            fileName = "";
+        }
 
     }
 
@@ -134,6 +147,7 @@ public class AudioFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view=null;
+        //we will create an audio file which can be played back in the same view
         if(mode==MODE.PLAY_AND_RECORD)
         {
             listener = (TheListener) getActivity();
@@ -148,7 +162,6 @@ public class AudioFragment extends Fragment
         else if(mode==MODE.PLAY)
         {
             onPlay(false);
-            return view;
         }
 
         return view;
