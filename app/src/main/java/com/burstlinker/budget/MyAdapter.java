@@ -51,29 +51,35 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
         holder.date.setText(current.getFormattedDate());
         holder.category.setText(current.getCategory().toString());
         final String fileName = current.getNotePath();
-        holder.note.setOnClickListener(
-                new Button.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        //we need to make sure there is a file to play
-                        if(fileName!="")
-                        {
-                            AudioFragment frag = new AudioFragment();
-                            //create a bundle for including args
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("mode", AudioFragment.MODE.PLAY);
-                            bundle.putString("file", fileName);
-                            //set args
-                            frag.setArguments(bundle);
-                            FragmentTransaction transaction = ((Activity) context).getFragmentManager().beginTransaction();
-                            transaction.add(frag, "headless");
-                            transaction.commit();
+        if(!fileName.isEmpty()&&fileName!=null)
+        {
+            holder.note.setOnClickListener(
+                    new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //we need to make sure there is a file to play
+
+                            {
+                                AudioFragment frag = new AudioFragment();
+                                //create a bundle for including args
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("mode", AudioFragment.MODE.PLAY);
+                                bundle.putString("file", fileName);
+                                //set args
+                                frag.setArguments(bundle);
+                                FragmentTransaction transaction = ((Activity) context).getFragmentManager().beginTransaction();
+                                transaction.add(frag, "headless");
+                                transaction.commit();
+                            }
                         }
                     }
-                }
-        );
+            );
+        }
+        else
+        {
+            holder.note.setVisibility(View.GONE);
+            holder.note.setClickable(false);
+        }
     }
 
     @Override

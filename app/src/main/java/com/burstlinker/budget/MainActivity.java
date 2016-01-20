@@ -118,26 +118,31 @@ public class MainActivity extends AppCompatActivity
 
                                }
                                //reset views
-                               purchaseDate.setText("");
-                               dateCBox.setChecked(true);
-                               NoteCBox.performClick();
 
                            }
-                           if(note!="")
-                           {
-                               purchase.setNotePath(note);
-                           }
+
+
+                           purchase.setNotePath(note);
+
                            purchase.setCategory(catSpinner.getSelectedItem().toString());
                            db.addRecord(purchase);
-                           //clear both fields
+                           //resetViews
+                           purchaseDate.setText("");
+                           dateCBox.setChecked(true);
+                           if(NoteCBox.isChecked())
+                           {
+                               NoteCBox.performClick();
+                           }
                            purchaseName.setText("");
                            purchasePrice.setText("");
+                           note = "";
 
                        }
                    }
                }
        );
     }
+    //launch displayData activity
     public void displayData()
     {
        displayButton.setOnClickListener(
