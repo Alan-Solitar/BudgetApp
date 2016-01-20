@@ -82,41 +82,49 @@ public class DBHandler extends SQLiteOpenHelper
     }
     public float getAverage()
     {
+        float avg=0;
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT AVG("+COL_3+ ") FROM "+ PURCHASE_TABLE;
         Cursor cursor = db.rawQuery(query,null);
-        if(cursor!=null)
+        if(cursor!=null&&cursor.getCount()>0)
         {
             cursor.moveToLast();
+
+            avg = cursor.getFloat(0);
+            Log.e("Alan's tag", Float.toString(avg));
         }
-        float avg = cursor.getFloat(0);
-        Log.e("Alan's tag", Float.toString(avg));
         return avg;
     }
     public float getSum()
     {
+        float sum=0;
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT SUM("+COL_3+ ") FROM "+ PURCHASE_TABLE;
         Cursor cursor = db.rawQuery(query,null);
-        if(cursor!=null)
+        if(cursor!=null&&cursor.getCount()>0)
         {
             cursor.moveToLast();
+
+            sum = cursor.getFloat(0);
+            Log.e("Alan's tag", Float.toString(sum));
         }
-        float sum = cursor.getFloat(0);
-        Log.e("Alan's tag",Float.toString(sum));
         return sum;
     }
     public String getMode()
     {
+        String mode = "";
         SQLiteDatabase db = getWritableDatabase();
         String query =
         "SELECT + " +COL_6+
         " FROM "+ PURCHASE_TABLE +
         " WHERE "+COL_3 +" = (SELECT MAX( " + COL_3 + ") FROM " + PURCHASE_TABLE +")";
         Cursor cursor = db.rawQuery(query,null);
-        cursor.moveToLast();
-        String mode = cursor.getString(0);
-        Log.e("Alan's tag",mode);
+        if(cursor!=null&&cursor.getCount()>0)
+        {
+            cursor.moveToLast();
+            mode = cursor.getString(0);
+            Log.e("Alan's tag", mode);
+        }
         return mode;
     }
     public HashMap<String,Integer> getCategoryOcurrences()

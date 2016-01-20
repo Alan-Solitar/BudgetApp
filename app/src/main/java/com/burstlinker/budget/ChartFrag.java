@@ -27,6 +27,7 @@ import java.util.Map;
  */
 public class ChartFrag extends Fragment
 {
+    Boolean mapIsEmpty;
     HashMap<String,Integer> map=null;
     DBHandler db;
     PieChart pie;
@@ -44,32 +45,32 @@ public class ChartFrag extends Fragment
         datax = new ArrayList<>();
         super.onCreate(savedInstanceState);
         db = new DBHandler(this.getActivity(),null,null,1);
+
         map=db.getCategoryOcurrences();
-
-
-        //We need to get the total number of purchases
-        int total=0;
-        for(HashMap.Entry<String,Integer> ent:map.entrySet())
+        mapIsEmpty = map.isEmpty();
+        //we must make sure there is data
+        if(!mapIsEmpty)
         {
-            total+=ent.getValue();
-        }
+            //We need to get the total number of purchases
+            int total = 0;
+            for (HashMap.Entry<String, Integer> ent : map.entrySet()) {
+                total += ent.getValue();
+            }
 
-        //we need to calculate the percentage for each category.
-        //loop through all categories
-        String tempCat;
-        Float percent;
-        for(int i=0; i<cats.length;i++)
-        {
-            tempCat = cats[i];
-            Integer value = map.get(tempCat);
-            if (value!=null)
-            {
+            //we need to calculate the percentage for each category.
+            //loop through all categories
+            String tempCat;
+            Float percent;
+            for (int i = 0; i < cats.length; i++) {
+                tempCat = cats[i];
+                Integer value = map.get(tempCat);
+                if (value != null) {
 
-                percent = (Float.valueOf(value)/total)*100;
-                percents.put(tempCat,percent);
+                    percent = (Float.valueOf(value) / total) * 100;
+                    percents.put(tempCat, percent);
+                }
             }
         }
-
 
     }
 
@@ -83,12 +84,14 @@ public class ChartFrag extends Fragment
         pie =(PieChart) view.findViewById(R.id.chart);
 
         //set up pie chart
-        pie.setRa
         pie.setUsePercentValues(true);
         pie.setRotationAngle(0);
         pie.setRotationEnabled(true);
         pie.setDescription("Purchase by Category");
-        addData();
+        if(!mapIsEmpty)
+        {
+            addData();
+        }
         return view;
     }
 
