@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,16 +31,17 @@ public class ChartFrag extends Fragment
     DBHandler db;
     PieChart pie;
     String[] cats;
-    HashMap<Float,String> percents;
+    Map<String,Float> percents;
+    //Labels for the chart
     ArrayList<String> datax;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        percents = new HashMap<Float,String>();
+        percents = new LinkedHashMap<>();
         cats= getActivity().getResources().getStringArray(R.array.category_array);
-        datax = new ArrayList<String>();
+        datax = new ArrayList<>();
         super.onCreate(savedInstanceState);
         db = new DBHandler(this.getActivity(),null,null,1);
         map=db.getCategoryOcurrences();
@@ -52,14 +55,18 @@ public class ChartFrag extends Fragment
         }
 
         //we need to calculate the percentage for each category.
+        //loop through all categories
+        String tempCat;
+        Float percent;
         for(int i=0; i<cats.length;i++)
         {
-           Integer value = map.get(cats[i]);
-            if (value!=null&cats[i]!=null)
+            tempCat = cats[i];
+            Integer value = map.get(tempCat);
+            if (value!=null)
             {
-                datax.add(cats[i]);
-                Float f = Float.valueOf(map.get(cats[i])) / total;
-                percents.put((Float.valueOf(map.get(cats[i])) / total), cats[i]);
+
+                percent = (Float.valueOf(value)/total)*100;
+                percents.put(tempCat,percent);
             }
         }
 
@@ -76,6 +83,7 @@ public class ChartFrag extends Fragment
         pie =(PieChart) view.findViewById(R.id.chart);
 
         //set up pie chart
+        pie.setRa
         pie.setUsePercentValues(true);
         pie.setRotationAngle(0);
         pie.setRotationEnabled(true);
@@ -88,17 +96,24 @@ public class ChartFrag extends Fragment
 
     public void addData()
     {
-       ArrayList<Entry> dataset = new ArrayList<Entry>() ;
+       ArrayList<Entry> dataset = new ArrayList<>() ;
+
+
+        String tempCat;
         int i=0;
-        for(HashMap.Entry<Float,String> ent:percents.entrySet())
+        for(String cat: cats)
         {
-            if(ent.getValue()!=null);
+            Float value = percents.get(cat);
+            if(value!=null)
             {
-                dataset.add(new Entry(ent.getKey(),i));
-                i++;
+                datax.add(cat);
+                dataset.add(new Entry(value,i));
+                ++i;
             }
         }
-        PieDataSet data = new PieDataSet(dataset,"chart");
+
+
+        PieDataSet data = new PieDataSet(dataset,"CAT");
         //set colors
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(Color.GREEN);
