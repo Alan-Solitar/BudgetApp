@@ -32,12 +32,12 @@ public class PurchaseProvider extends ContentProvider
     static final String TABLE_NAME = "items";
     static final int VERSION =1;
     //databse columns
-    static final String COL_1 = "id";
-    static final String COL_2 = "name";
-    static final String COL_3 = "price";
-    static final String COL_4 = "date";
-    static final String COL_5 = "note";
-    static final String COL_6 = "category";
+    static final String ID = "id";
+    static final String NAME = "name";
+    static final String PRICE= "price";
+    static final String DATE = "date";
+    static final String NOTE = "note";
+    static final String CATEGORY = "category";
 
     //uri
     static final UriMatcher uriMatcher;
@@ -47,6 +47,7 @@ public class PurchaseProvider extends ContentProvider
     {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(PROVIDER_NAME,path,PURCHASES);
+        uriMatcher.addURI(PROVIDER_NAME,path,PURCHASE_ID);
     }
 
     //Query string
@@ -136,13 +137,33 @@ public class PurchaseProvider extends ContentProvider
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs)
     {
-        return 0;
+        int rowsDeleted =0;
+        switch(uriMatcher.match(uri))
+        {
+            case PURCHASES:
+                rowsDeleted = db.delete(TABLE_NAME,selection,selectionArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported uri"+uri);
+        }
+        getContext().getContentResolver().notifyChange(uri,null);
+        return rowsDeleted;
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)
     {
-        return 0;
+        int rowsUpdated =0;
+        switch(uriMatcher.match(uri))
+        {
+            case PURCHASES:
+                rowsUpdated = db.update(TABLE_NAME,values,selection,selectionArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported uri"+uri);
+        }
+        getContext().getContentResolver().notifyChange(uri,null);
+        return rowsUpdated;
     }
 
     private static class DBHandler extends SQLiteOpenHelper
