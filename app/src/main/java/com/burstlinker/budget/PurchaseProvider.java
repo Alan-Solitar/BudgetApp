@@ -22,10 +22,16 @@ import java.util.HashMap;
 public class PurchaseProvider extends ContentProvider
 {
     //uri info
-    static final String PROVIDER_NAME = "com.burstlinker.budget.PurchaseProvider"
-    static final String path = "purch";
-    static final String URL = "content://" + PROVIDER_NAME +"/"+ path;
+    static final String PROVIDER_NAME = "com.burstlinker.budget.PurchaseProvider";
+    static final String purchasePath = "Purch";
+    static final String purchaseCategoryPath = "cat1";
+    static final String catOccurrencePath = "cat2";
+    static final String URL = "content://" + PROVIDER_NAME +"/"+ purchasePath;
+    static final String URL2 = "content://" + PROVIDER_NAME +"/"+ purchaseCategoryPath;
+    static final String URL3 = "content://" + PROVIDER_NAME +"/"+ catOccurrencePath;
     static final Uri CONTENT_URI = Uri.parse(URL);
+    static final Uri CONTENT_URI_PURCHASE_CATEGORY = Uri.parse(URL2);
+    static final Uri CONTENT_URI_CAT_OCCURRENCE = Uri.parse(URL3);
 
     //databse info
     static final String DATABASE_NAME = "budget.db";
@@ -42,22 +48,32 @@ public class PurchaseProvider extends ContentProvider
     //uri
     static final UriMatcher uriMatcher;
     static final int PURCHASES=1;
-    static final int PURCHASE_ID=2;
+    static final int PURCHASE_CATEGORY=2;
+    static final int CATEGORY_OCCURRENCE=3;
     static
     {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI(PROVIDER_NAME,path,PURCHASES);
-        uriMatcher.addURI(PROVIDER_NAME,path,PURCHASE_ID);
+        uriMatcher.addURI(PROVIDER_NAME,purchasePath,PURCHASES);
+        uriMatcher.addURI(PROVIDER_NAME,purchaseCategoryPath,PURCHASE_CATEGORY);
+        uriMatcher.addURI(PROVIDER_NAME,catOccurrencePath,CATEGORY_OCCURRENCE);
+
     }
 
     //Query string
-    static final String DB_CREATE = "CREATE TABLE "+ TABLE_NAME + " ( "+
-            COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            COL_2 + " TEXT," +
-            COL_3 + " DECIMAL(10,2),"+
-            COL_4 + " INTEGER,"+
-            COL_5 + " TEXT," +
-            COL_6 + " TEXT" + ")";
+    private static final String DB_CREATE = "CREATE TABLE "+ TABLE_NAME + " ( "+
+            ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            NAME + " TEXT," +
+            PRICE + " DECIMAL(10,2),"+
+            DATE + " INTEGER,"+
+            NOTE + " TEXT," +
+            CATEGORY + " TEXT" + ")";
+    private static final String CAT_QUERY =
+            "SELECT + " +CATEGORY+
+                    " FROM "+ TABLE_NAME +
+                    " WHERE "+PRICE +" = (SELECT MAX( " + PRICE + ") FROM " + TABLE_NAME +")";
+
+    private static final String CAT_OCURRENCE_QUERY = "SELECT "+CATEGORY +", COUNT(*) FROM "+TABLE_NAME +
+        " GROUP BY "+CATEGORY;
 
     //db object
     private SQLiteDatabase db;
@@ -87,15 +103,21 @@ public class PurchaseProvider extends ContentProvider
     {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(TABLE_NAME);
+        Cursor cursor=null;
         switch(uriMatcher.match(uri))
         {
             case PURCHASES:
                 queryBuilder.setProjectionMap(values);
                 break;
+            case PURCHASE_CATEGORY:
+                cursor = db.rawQuery(CAT_QUERY,null);
+                return cursor;
+            case CATEGORY_OCCURRENCE:
+                cursor = db.rawQuery(CAT_OCURRENCE_QUERY,null);
             default:
                 throw new IllegalArgumentException("Unkown URI " + uri);
         }
-        Cursor cursor = queryBuilder.query(db,projection,selection,selectionArgs,null,null,sortOrder);
+        cursor = queryBuilder.query(db,projection,selection,selectionArgs,null,null,sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(),uri);
         return cursor;
     }
@@ -107,9 +129,12 @@ public class PurchaseProvider extends ContentProvider
         switch(uriMatcher.match(uri))
         {
             case PURCHASES:
-                return "vnd.android.cursor.dir/" +path;
-            case PURCHASE_ID
-                return "vnd.android.cursor.item/" +path;
+                return "vnd.android.cursor.dir/" +purchasePath;
+            case PURCHASE_CATEGORY:
+                return "vnd.android.cursor.item/" +purchaseCategoryPath;
+            case CATEGORY_OCCURRENCE:
+                return "vnd.android.cursor.item/" +catOccurrencePath;
+
             default:
                 throw new IllegalArgumentException("Unsupported uri"+uri);
         }
@@ -157,7 +182,7 @@ public class PurchaseProvider extends ContentProvider
         switch(uriMatcher.match(uri))
         {
             case PURCHASES:
-                rowsUpdated = db.update(TABLE_NAME,values,selection,selectionArgs);
+                rowsUpdated = db.update(TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported uri"+uri);

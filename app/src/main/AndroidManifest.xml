@@ -26,6 +26,12 @@
             android:label= "@string/title_activity_stat_display"
             android:screenOrientation="portrait">
         </activity>
+        <provider
+            android:name = ".PurchaseProvider"
+            android:authorities="com.burstlinker.budget.PurchaseProvider"
+            android:exported="false"
+            android:multiprocess="true">
+        </provider>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
