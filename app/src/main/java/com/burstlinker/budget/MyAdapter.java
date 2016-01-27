@@ -28,7 +28,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
         this.context=context;
         purchases = dataSet;
     }
-
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
@@ -42,8 +41,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position)
     {
-
-
         //give purchase meta data to the viewholder
         Purchase current = purchases.get(position);
         holder.name.setText(current.getName());

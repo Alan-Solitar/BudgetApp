@@ -50,20 +50,20 @@ public class PurchaseHandler
         //the columns we want
         String[] projection = {PurchaseProvider.ID,PurchaseProvider.NAME,PurchaseProvider.PRICE,PurchaseProvider.DATE,
                 PurchaseProvider.NOTE,PurchaseProvider.CATEGORY};
-        Cursor resultSet = resolver.query(uriAll, projection, null, null, null);
+        Cursor cursor = resolver.query(uriAll, projection, null, null, null);
         Purchase current;
-        while(resultSet.moveToNext())
+        while(cursor.moveToNext())
         {
             current = new Purchase();
-            current.setID(resultSet.getInt(0));
-            current.setName(resultSet.getString(1));
-            current.setPrice(resultSet.getFloat(2));
-            current.setDate(resultSet.getLong(3));
-            current.setNotePath(resultSet.getString(4));
-            current.setCategory(resultSet.getString(5));
+            current.setID(cursor.getInt(0));
+            current.setName(cursor.getString(1));
+            current.setPrice(cursor.getFloat(2));
+            current.setDate(cursor.getLong(3));
+            current.setNotePath(cursor.getString(4));
+            current.setCategory(cursor.getString(5));
             purchases.add(current);
         }
-        resultSet.close();
+        cursor.close();
         return purchases;
     }
 
@@ -87,6 +87,7 @@ public class PurchaseHandler
             avg = cursor.getFloat(0);
             Log.e("Alan's tag", Float.toString(avg));
         }
+        cursor.close();
         return avg;
     }
     public float getSum()
@@ -102,6 +103,7 @@ public class PurchaseHandler
             sum = cursor.getFloat(0);
             Log.e("Alan's tag", Float.toString(sum));
         }
+        cursor.close();
         return sum;
     }
     public String getMode()
@@ -115,13 +117,14 @@ public class PurchaseHandler
             mode = cursor.getString(0);
             Log.e("Alan's tag", mode);
         }
+        cursor.close();
         return mode;
     }
 
-    public HashMap<String,Integer> getCategoryOcurrences()
+    public HashMap<String,Integer> getCategoryOccurrences()
     {
         String cat;
-        int occurences;
+        int occurrences;
         HashMap<String,Integer> map = new HashMap<>();
 
 
@@ -129,11 +132,11 @@ public class PurchaseHandler
         while(cursor.moveToNext())
         {
             cat=cursor.getString(0);
-            occurences=cursor.getInt(1);
-            map.put(cat,occurences);
+            occurrences=cursor.getInt(1);
+            map.put(cat,occurrences);
         }
 
-
+        cursor.close();
         return map;
     }
 }

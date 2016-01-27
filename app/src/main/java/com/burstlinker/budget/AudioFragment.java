@@ -79,7 +79,6 @@ public class AudioFragment extends Fragment
     private void startRecording()
     {
         mrecorder = new MediaRecorder();
-        mrecorder.reset();
         mrecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mrecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         fileName=generator.getSavedfile("3pg");
@@ -161,6 +160,8 @@ public class AudioFragment extends Fragment
         }
         else if(mode==MODE.PLAY)
         {
+            if(mplayer!=null)
+            mplayer.reset();
             onPlay(false);
         }
 
