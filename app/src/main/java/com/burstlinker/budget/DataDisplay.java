@@ -15,7 +15,8 @@ public class DataDisplay extends AppCompatActivity
 {
     private ArrayList<Purchase> purchases=null;
     private MyAdapter adapter;
-    private DBHandler db;
+    //private DBHandler db;
+    private PurchaseHandler purchaseHandler;
     private RecyclerView recycle;
     private RecyclerView.LayoutManager myLayoutManager;
 
@@ -24,8 +25,10 @@ public class DataDisplay extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_display);
-        db= new DBHandler(this,null,null,1);
-        purchases = db.getRecords();
+        //db= new DBHandler(this,null,null,1);
+        //get records to populate the recycler view
+        purchaseHandler = new PurchaseHandler(getApplicationContext());
+        purchases = purchaseHandler.getRecords();
         recycle = (RecyclerView) findViewById(R.id.my_recycler_view);
         myLayoutManager = new LinearLayoutManager(this);
         recycle.setLayoutManager(myLayoutManager);

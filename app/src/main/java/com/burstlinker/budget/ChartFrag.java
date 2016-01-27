@@ -29,7 +29,8 @@ public class ChartFrag extends Fragment
 {
     Boolean mapIsEmpty;
     HashMap<String,Integer> map=null;
-    DBHandler db;
+    //DBHandler db;
+    PurchaseHandler purchaseHandler;
     PieChart pie;
     String[] cats;
     Map<String,Float> percents;
@@ -40,13 +41,14 @@ public class ChartFrag extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        super.onCreate(savedInstanceState);
         percents = new LinkedHashMap<>();
         cats= getActivity().getResources().getStringArray(R.array.category_array);
         datax = new ArrayList<>();
-        super.onCreate(savedInstanceState);
-        db = new DBHandler(this.getActivity(),null,null,1);
+        purchaseHandler = new PurchaseHandler(getActivity().getApplicationContext());
 
-        map=db.getCategoryOcurrences();
+        //map=db.getCategoryOcurrences();
+        map = purchaseHandler.getCategoryOccurrences();
         mapIsEmpty = map.isEmpty();
         //we must make sure there is data
         if(!mapIsEmpty)

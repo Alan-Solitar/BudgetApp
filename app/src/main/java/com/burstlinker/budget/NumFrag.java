@@ -18,14 +18,15 @@ public class NumFrag extends Fragment
 {
 
 TextView avg,sum,mode;
-DBHandler db=null;
-
+//DBHandler db=null;
+PurchaseHandler purchaseHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        db = new DBHandler(this.getActivity(),null,null,1);
+        //db = new DBHandler(this.getActivity(),null,null,1);
+        purchaseHandler = new PurchaseHandler(getActivity().getApplicationContext());
     }
 
     @Override
@@ -43,12 +44,12 @@ DBHandler db=null;
         }
 
     //we need to format this to dollars
-        DecimalFormat moneyFormat = new DecimalFormat("$0.00");
+        DecimalFormat moneyFormat = new DecimalFormat(Constants.Format.DOLLAR_FORMAT);
 
 
-        sum.setText(moneyFormat.format(db.getSum()));
-        avg.setText(moneyFormat.format(db.getAverage()));
-        mode.setText(db.getMode());
+        sum.setText(moneyFormat.format(purchaseHandler.getSum()));
+        avg.setText(moneyFormat.format(purchaseHandler.getAverage()));
+        mode.setText(purchaseHandler.getMode());
 
         return view;
     }

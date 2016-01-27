@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity
         implements DatePickerFragment.TheListener,
         AudioFragment.TheListener
 {
-    DBHandler db;
+    //DBHandler db;
+    PurchaseHandler purchaseHandler;
     Spinner catSpinner;
     Button enterButton;
     Button displayButton;
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        db = new DBHandler(this,null,null,1);
+        //db = new DBHandler(this,null,null,1);
+        purchaseHandler = new PurchaseHandler(getApplicationContext());
 
         note= "";
         //widgets
@@ -117,7 +119,6 @@ public class MainActivity extends AppCompatActivity
                                {
 
                                }
-                               //reset views
 
                            }
 
@@ -125,7 +126,8 @@ public class MainActivity extends AppCompatActivity
                            purchase.setNotePath(note);
 
                            purchase.setCategory(catSpinner.getSelectedItem().toString());
-                           db.addRecord(purchase);
+                           //db.addRecord(purchase);
+                           purchaseHandler.insert(purchase);
                            //resetViews
                            purchaseDate.setText("");
                            dateCBox.setChecked(true);
@@ -283,3 +285,5 @@ public class MainActivity extends AppCompatActivity
 
 
 }
+
+
