@@ -16,7 +16,9 @@ import java.util.HashMap;
  */
 public class PurchaseHandler
 {
+    public enum LIMIT {NO_LIMIT,THREE,FIVE}
     String price=null;
+    String date=null;
     Uri uriAll=null;
     Uri uriCategory=null;
     Uri uriCatOccurrence=null;
@@ -30,6 +32,7 @@ public class PurchaseHandler
         uriCategory= PurchaseProvider.CONTENT_URI_PURCHASE_CATEGORY;
         uriCatOccurrence = PurchaseProvider.CONTENT_URI_CAT_OCCURRENCE;
         price = PurchaseProvider.PRICE;
+        date = PurchaseProvider.DATE;
     }
 
     public void insert(Purchase purchase)
@@ -43,14 +46,29 @@ public class PurchaseHandler
         contentValues.put(PurchaseProvider.CATEGORY, purchase.getCategory().name());
         Uri _uri = resolver.insert(uriAll, contentValues);
     }
-    public ArrayList<Purchase> getRecords()
+    public ArrayList<Purchase> getRecords(LIMIT limit)
     {
         //array to store purchase items
         ArrayList<Purchase> purchases = new ArrayList<Purchase>();
         //the columns we want
         String[] projection = {PurchaseProvider.ID,PurchaseProvider.NAME,PurchaseProvider.PRICE,PurchaseProvider.DATE,
                 PurchaseProvider.NOTE,PurchaseProvider.CATEGORY};
-        Cursor cursor = resolver.query(uriAll, projection, null, null, null);
+        String sortOrder="";
+
+        if(limit==LIMIT.THREE)
+        {
+            sortOrder = date + " DESC LIMIT 3";
+        }
+        else if(limit==LIMIT.FIVE)
+        {
+            sortOrder = date + " DESC LIMIT 5";
+        }
+        else
+        {
+            sortOrder = date + " DESC";
+        }
+
+        Cursor cursor = resolver.query(uriAll, projection, null, null, sortOrder);
         Purchase current;
         while(cursor.moveToNext())
         {
@@ -121,6 +139,7 @@ public class PurchaseHandler
         return mode;
     }
 
+
     public HashMap<String,Integer> getCategoryOccurrences()
     {
         String cat;
@@ -139,4 +158,5 @@ public class PurchaseHandler
         cursor.close();
         return map;
     }
+
 }
