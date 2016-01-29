@@ -9,6 +9,7 @@ public class Constants
   {
       public static final String DATE_FORMAT = "yyyy-MM-dd";
       public static final String DOLLAR_FORMAT = "$0.00";
+      public static final String DOLLARS_ONLY = "$0";
   }
 
 }

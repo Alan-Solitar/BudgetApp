@@ -3,41 +3,42 @@
     <!-- Strings -->
 
 
-
     <!--Titles -->
-    <string name = "title_activity_data_display">Data Display</string>
-    <string name = "title_activity_stat_display">Stats</string>
-    <string name = "app_name">Budget</string>
+    <string name="title_activity_data_display">Data Display</string>
+    <string name="title_activity_stat_display">Stats</string>
+    <string name="app_name">Budget</string>
 
     <!--Main Activity Labels-->
-    <string name = "name_text">Item Name</string>
-    <string name = "price_text">Price</string>
-    <string name = "category_text">Category</string>
-    <string name = "audio_note_text">Record Note?</string>
-    <string name = "date_text">Date</string>
-    <string name = "date_text_current">Use Today\'s Date</string>
+    <string name="name_text">Item Name</string>
+    <string name="price_text">Price</string>
+    <string name="category_text">Category</string>
+    <string name="audio_note_text">Record Note?</string>
+    <string name="date_text">Date</string>
+    <string name="date_text_current">Use Today\'s Date</string>
 
     <!--Main Activity buttons-->
-    <string name = "enter_button_text">Enter</string>
-    <string name = "display_button_text">View</string>
-    <string name = "stat_button_text">Stats</string>
-    <string name = "network_button_text">connect</string>
+    <string name="enter_button_text">Enter</string>
+    <string name="display_button_text">View</string>
+    <string name="stat_button_text">Stats</string>
+    <string name="network_button_text">connect</string>
 
     <!--Formatting-->
-    <string name = "date_format">yyyy-MM-dd</string>
+    <string name="date_format">yyyy-MM-dd</string>
 
     <!--Audio strings-->
-    <string name = "play_text">play</string>
-    <string name = "stop_text">stop</string>
-    <string name = "record_text">rec</string>
+    <string name="play_text">play</string>
+    <string name="stop_text">stop</string>
+    <string name="record_text">rec</string>
     <!--Audio strings-->
-    <string name = "total_text">Total Spent</string>
-    <string name = "avg_text">Average Price</string>
-    <string name = "mode_text">Top category</string>
+    <string name="total_text">Total Spent</string>
+    <string name="avg_text">Average Price</string>
+    <string name="mode_text">Top category</string>
 
     <!--Assorted-->
-    <string name = "action_settings">Settings</string>
-    <string name = "dummy_text">Dummy Text</string>
+    <string name="action_settings">Settings</string>
+    <string name="dummy_text">Dummy Text</string>
+    <string name="recent_text">Recent Purchases</string>
+    <string name="quick_add">Quick Add</string>
 
     <!-- String Arrays-->
     <string-array name="category_array">
