@@ -28,15 +28,13 @@ public class DataDisplay extends AppCompatActivity
         //db= new DBHandler(this,null,null,1);
         //get records to populate the recycler view
         purchaseHandler = new PurchaseHandler(getApplicationContext());
-        purchases = purchaseHandler.getRecords();
+        purchases = purchaseHandler.getRecords(PurchaseHandler.LIMIT.NO_LIMIT);
         recycle = (RecyclerView) findViewById(R.id.my_recycler_view);
         myLayoutManager = new LinearLayoutManager(this);
         recycle.setLayoutManager(myLayoutManager);
-
-
-
         adapter = new MyAdapter(purchases,this);
         recycle.setAdapter(adapter);
+        recycle.addItemDecoration(new DividerItemDecoration(this));
 
     }
 
