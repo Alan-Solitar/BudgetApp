@@ -1,12 +1,10 @@
 package com.burstlinker.budget;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.content.Intent;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +22,7 @@ public class MainActivity extends AppCompatActivity
         implements DatePickerFragment.TheListener,
         AudioFragment.TheListener
 {
+    private Toolbar toolbar;
     //DBHandler db;
     PurchaseHandler purchaseHandler;
     Spinner catSpinner;
@@ -49,6 +47,8 @@ public class MainActivity extends AppCompatActivity
 
         note= "";
         //widgets
+        toolbar = (Toolbar)findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
         enterButton = (Button) findViewById(R.id.enter_button);
         displayButton = (Button) findViewById(R.id.display_button);
         statButton = (Button)findViewById(R.id.stat_button);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-                        Intent go_displayStats = new Intent(MainActivity.this,StatisticsActivity.class);
+                        Intent go_displayStats = new Intent(MainActivity.this,StatFragment.class);
                         startActivity(go_displayStats);
                     }
                 }
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity
                    @Override
                    public void onClick(View v)
                    {
-                       Intent go_displayData = new Intent(MainActivity.this,DataDisplay.class);
+                       Intent go_displayData = new Intent(MainActivity.this,HistoryFrag.class);
                         startActivity(go_displayData);
                    }
                }
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("mode",AudioFragment.MODE.PLAY_AND_RECORD);
                             audiofrag.setArguments(bundle);
-                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_container,audiofrag);
                             transaction.commit();
 
@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity
 
                         else
                         {
-                            getFragmentManager().beginTransaction().remove(audiofrag).commit();
+                            getSupportFragmentManager().beginTransaction().remove(audiofrag).commit();
                         }
                     }
                 }
@@ -268,15 +268,16 @@ public class MainActivity extends AppCompatActivity
                 new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ConnectivityManager cmanager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                        NetworkInfo networkInfo = cmanager.getActiveNetworkInfo();
-                        if (networkInfo != null && networkInfo.isConnected())
-                        {
-                            Toast.makeText( getApplicationContext(),"Connection is good to go", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Please check your internet connection", Toast.LENGTH_LONG).show();
-                        }
-
+                      //  ConnectivityManager cmanager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                       // NetworkInfo networkInfo = cmanager.getActiveNetworkInfo();
+                        //if (networkInfo != null && networkInfo.isConnected())
+                        //{
+                         //   Toast.makeText( getApplicationContext(),"Connection is good to go", Toast.LENGTH_LONG).show();
+                        //} else {
+                         //   Toast.makeText(getApplicationContext(), "Please check your internet connection", Toast.LENGTH_LONG).show();
+                        //}
+                        Intent go_displayData = new Intent(MainActivity.this,MainActivity2.class);
+                        startActivity(go_displayData);
                     }
                 }
         );

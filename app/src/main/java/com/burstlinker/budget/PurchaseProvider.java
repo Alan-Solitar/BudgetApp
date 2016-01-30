@@ -113,7 +113,8 @@ public class PurchaseProvider extends ContentProvider
                 cursor = db.rawQuery(CAT_QUERY,null);
                 return cursor;
             case CATEGORY_OCCURRENCE:
-                return cursor = db.rawQuery(CAT_OCURRENCE_QUERY,null);
+                cursor = db.rawQuery(CAT_OCURRENCE_QUERY,null);
+                return cursor;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }

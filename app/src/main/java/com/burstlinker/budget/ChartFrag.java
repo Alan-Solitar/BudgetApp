@@ -1,6 +1,5 @@
 package com.burstlinker.budget;
 
-import android.app.Fragment;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ import java.util.Map;
 /**
  * Created by Alan Solitar on 2016/01/18.
  */
-public class ChartFrag extends Fragment
+public class ChartFrag extends android.support.v4.app.Fragment
 {
     Boolean mapIsEmpty;
     HashMap<String,Integer> map=null;

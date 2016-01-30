@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
 /**
  * Created by Alan Solitar on 2016/01/18.
  */
-public class NumFrag extends Fragment
+public class NumFrag extends android.support.v4.app.Fragment
 {
 
 TextView avg,sum,mode;

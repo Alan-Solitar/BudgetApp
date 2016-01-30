@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by Alan Solitar on 2016/01/28.
  */
-public class QuickFrag extends Fragment
+public class QuickFrag extends android.support.v4.app.Fragment
 {
     private ArrayList<Purchase> purchases = null;
     private MyAdapter adapter;
@@ -24,7 +24,7 @@ public class QuickFrag extends Fragment
     private RecyclerView.LayoutManager myLayoutManager;
     private PurchaseHandler purchaseHandler = null;
     private Context context;
-
+    private View view;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -39,10 +39,9 @@ public class QuickFrag extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = null;
         view = inflater.inflate(R.layout.quick_page, container, false);
         recycle = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-        adapter = new MyAdapter(purchases, context);
+        adapter = new MyAdapter(purchases, context,this.getActivity().getSupportFragmentManager());
         myLayoutManager = new LinearLayoutManager(context);
         recycle.setAdapter(adapter);
         recycle.setLayoutManager(myLayoutManager);

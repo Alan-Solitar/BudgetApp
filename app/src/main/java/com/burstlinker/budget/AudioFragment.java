@@ -18,7 +18,7 @@ import java.io.IOException;
  * Created by Alan Solitar on 2016/01/16.
  */
 
-public class AudioFragment extends Fragment
+public class AudioFragment extends android.support.v4.app.Fragment
 {
     TheListener listener;
 

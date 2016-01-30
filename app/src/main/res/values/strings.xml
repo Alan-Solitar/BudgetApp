@@ -40,7 +40,10 @@
     <string name="recent_text">Recent Purchases</string>
     <string name="quick_add">Quick Add</string>
 
-    <!-- String Arrays-->
+    <!--String Arrays-->
+
+    <!--Purchase Categories-->
+
     <string-array name="category_array">
         <item>FOOD</item>
         <item>FAMILY</item>
@@ -49,4 +52,14 @@
         <item>TRANSPORTATION</item>
         <item>EDUCATION</item>
     </string-array>
+
+    <!--Tabs Array-->
+    <string-array name="tab_names">
+        <item>tab1</item>
+        <item>tab2</item>
+        <item>tab3</item>
+        <item>tab4</item>
+        <item>tab5</item>
+    </string-array>
+
 </resources>

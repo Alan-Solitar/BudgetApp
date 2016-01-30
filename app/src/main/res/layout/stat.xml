@@ -2,16 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#C1E8F5">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/container1"
         android:layout_width="match_parent"
-        android:layout_height="178dp"
-        android:background="#C1E8F5"/>
+        android:layout_height="178dp"/>
     <FrameLayout
-        android:background="#C1E8F5"
         android:id="@+id/container2"
         android:layout_width="match_parent"
         android:layout_height="265dp" />

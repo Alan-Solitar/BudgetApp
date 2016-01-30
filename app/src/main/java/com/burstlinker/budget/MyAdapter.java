@@ -1,8 +1,8 @@
 package com.burstlinker.budget;
-import android.app.Activity;
-import android.app.FragmentTransaction;
+
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,19 +20,23 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
 {
     DecimalFormat moneyFormat;
-    private LayoutInflater inflater=null;
+    private LayoutInflater inflater = null;
     private List<Purchase> purchases;
     Context context;
-    public MyAdapter(ArrayList<Purchase> dataSet, Context context)
+    FragmentManager fmanager=null;
+
+    public MyAdapter(ArrayList<Purchase> dataSet, Context context, FragmentManager theManager)
     {
-        this.context=context;
+        this.fmanager=theManager;
+        this.context = context;
         purchases = dataSet;
     }
+
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        moneyFormat= new DecimalFormat("$0.00");
-        View view =LayoutInflater.from(parent.getContext())
+        moneyFormat = new DecimalFormat(Constants.Format.DOLLARS_ONLY);
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.purchase, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -48,15 +52,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
         holder.date.setText(current.getFormattedDate());
         holder.category.setText(current.getCategory().toString());
         final String fileName = current.getNotePath();
-        if(!fileName.isEmpty()&&fileName!=null)
+        if (!fileName.isEmpty() && fileName != null)
         {
             holder.note.setOnClickListener(
-                    new Button.OnClickListener() {
+                    new Button.OnClickListener()
+                    {
                         @Override
-                        public void onClick(View v) {
+                        public void onClick(View v)
+                        {
                             //we need to make sure there is a file to play
 
                             {
+
                                 AudioFragment frag = new AudioFragment();
                                 //create a bundle for including args
                                 Bundle bundle = new Bundle();
@@ -64,15 +71,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
                                 bundle.putString("file", fileName);
                                 //set args
                                 frag.setArguments(bundle);
-                                FragmentTransaction transaction = ((Activity) context).getFragmentManager().beginTransaction();
+                                android.support.v4.app.FragmentTransaction transaction = fmanager.beginTransaction();
                                 transaction.add(frag, "headless");
                                 transaction.commit();
                             }
                         }
                     }
             );
-        }
-        else
+        } else
         {
             holder.note.setVisibility(View.GONE);
             holder.note.setClickable(false);
@@ -96,11 +102,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
         public ViewHolder(View itemView)
         {
             super(itemView);
-            name = (TextView)itemView.findViewById(R.id.purchase_name);
-            price = (TextView)itemView.findViewById(R.id.purchase_price);
-            date = (TextView)itemView.findViewById(R.id.purchase_date);
-            category = (TextView)itemView.findViewById(R.id.purchase_cat);
-            note = (Button)itemView.findViewById(R.id.p_button);
+            name = (TextView) itemView.findViewById(R.id.purchase_name);
+            price = (TextView) itemView.findViewById(R.id.purchase_price);
+            date = (TextView) itemView.findViewById(R.id.purchase_date);
+            category = (TextView) itemView.findViewById(R.id.purchase_cat);
+            note = (Button) itemView.findViewById(R.id.p_button);
         }
     }
 
