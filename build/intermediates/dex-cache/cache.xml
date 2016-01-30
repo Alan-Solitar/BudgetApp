@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\BurstLinker 2\AndroidStudioProjects\Budget\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="C:\Users\BurstLinker 2\AndroidStudioProjects\Budget\app\build\intermediates\pre-dexed\debug\classes-d3c86e2d2efe8b624c0dd1fa67e29c38873a56d0.jar" />
+    </item>
+    <item
         jar="C:\Users\BurstLinker 2\AndroidStudioProjects\Budget\app\build\intermediates\exploded-aar\com.github.medyo\fancybuttons\1.5\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
