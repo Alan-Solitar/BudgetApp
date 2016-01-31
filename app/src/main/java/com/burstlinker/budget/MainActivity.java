@@ -7,6 +7,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +15,16 @@ import java.util.List;
 /**
  * Created by Alan Solitar on 2016/01/28.
  */
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements DatePickerFragment.TheListener,
+        AudioFragment.TheListener
 {
     private String[] tabs;
     private Toolbar toolbar = null;
     private ViewPager pager =null;
     private TabLayout tabLayout=null;
     List<Fragment> fragList= null;
+    Fragment currentFrag=null;
+    CustomPageAdapter pagerAdapter=null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -33,11 +37,12 @@ public class MainActivity extends AppCompatActivity
 
         tabLayout= (TabLayout) findViewById(R.id.tabs);
         fragList = new ArrayList<>();
-        fragList.add(new ChartFrag());
+        fragList.add(new EnterPurchaseFragment());
         fragList.add(new QuickFrag());
         fragList.add(new HistoryFrag());
+        fragList.add(new ChartFrag());
         fragList.add(new StatFragment());
-        PagerAdapter pagerAdapter = new PageAdapter(getSupportFragmentManager(),fragList,tabs);
+        pagerAdapter = new CustomPageAdapter(getSupportFragmentManager(),fragList,tabs);
         pager.setAdapter(pagerAdapter);
         tabLayout.setTabsFromPagerAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(pager);
@@ -50,4 +55,32 @@ public class MainActivity extends AppCompatActivity
         transaction.commit();
 */
     }
+
+    //callback methods for fragments
+    @Override
+    public void returnDate(String date)
+    {
+        //callback for datepickerdialog
+        //purchaseDate.setText(date);
+        currentFrag = pagerAdapter.getCurrentFrag();
+        if(currentFrag.getClass() ==EnterPurchaseFragment.class)
+        {
+            ((EnterPurchaseFragment) currentFrag).setDate(date);
+        }
+        Log.w("<!!!Alan's Tag!!!>", date);
+
+
+    }
+    @Override
+    public void returnFile(String file)
+    {
+        currentFrag = pagerAdapter.getCurrentFrag();
+        if(currentFrag.getClass() == EnterPurchaseFragment.class)
+        {
+            ((EnterPurchaseFragment) currentFrag).setFile(file);
+        }
+
+    }
+
+
 }
