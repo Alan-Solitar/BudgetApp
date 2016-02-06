@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_home"
+            android:title="@string/add_purchase_item"/>
+
+        <item
+            android:id="@+id/drawer_enter"
+            android:title="@string/purchases_overview_item"/>
+
+        <item
+            android:id="@+id/drawer_extra"
+            android:title="@string/third_item"/>
+
+    </group>
+</menu>
