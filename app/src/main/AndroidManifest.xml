@@ -8,23 +8,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".AltActivity"
-            android:label="@string/app_name">
 
-        </activity>
-        <activity
-            android:name=".HistoryFrag"
-            android:label="@string/title_activity_data_display">
-        </activity>
-        <activity
-            android:name=".StatFragment"
-            android:label="@string/title_activity_stat_display"
-            android:screenOrientation="portrait">
-        </activity>
+
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_stat_display">
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
