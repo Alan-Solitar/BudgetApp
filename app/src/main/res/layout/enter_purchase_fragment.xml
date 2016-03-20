@@ -116,7 +116,7 @@
             android:text="@string/enter_button_text"
             android:id="@+id/enter_button"/>
 
-        <Button
+      <!--  <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/display_button_text"
@@ -125,7 +125,7 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:id="@+id/stat_button"
-               android:text="@string/stat_button_text"/>
+               android:text="@string/stat_button_text"/>-->
 
            <Button
                android:layout_width="wrap_content"

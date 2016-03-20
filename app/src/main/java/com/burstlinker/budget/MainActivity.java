@@ -1,5 +1,6 @@
 package com.burstlinker.budget;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
  * Created by Alan Solitar on 2016/01/28.
  */
 public class MainActivity extends AppCompatActivity implements DatePickerFragment.TheListener,
-        AudioFragment.TheListener
+        AudioFragment.TheListener, NavigationView.OnNavigationItemSelectedListener
 {
     private String[] tabs;
     private Toolbar toolbar = null;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
     private NavigationView navigationView= null;
     private DrawerLayout drawerLayout=null;
     private ActionBarDrawerToggle actionBarDrawerToggle=null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,12 +81,20 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
 */
     }
 
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState)
     {
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     //callback methods for fragments
@@ -113,4 +124,18 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item)
+    {
+        //launch different activity depending on the selected item
+        switch(item.getItemId())
+        {
+            case R.id.purchase_add:
+
+                break;
+            case R.id.purchase_overview:
+
+        }
+        return false;
+    }
 }

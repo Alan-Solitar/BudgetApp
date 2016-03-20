@@ -3,6 +3,7 @@ package com.burstlinker.budget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -15,7 +16,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration
 
     public DividerItemDecoration(Context context)
     {
-        divider = context.getResources().getDrawable(R.drawable.line_divider);
+        divider = ContextCompat.getDrawable(context, R.drawable.line_divider);
     }
 
     @Override

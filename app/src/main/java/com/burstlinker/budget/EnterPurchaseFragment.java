@@ -1,11 +1,9 @@
 package com.burstlinker.budget;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,8 +24,7 @@ public class EnterPurchaseFragment extends Fragment
     PurchaseHandler purchaseHandler;
     Spinner catSpinner;
     Button enterButton;
-    Button displayButton;
-    Button statButton;
+
     EditText purchaseName;
     EditText purchasePrice;
     EditText purchaseDate;
@@ -51,8 +47,8 @@ public class EnterPurchaseFragment extends Fragment
 
         //Methods that correspond to various clicks
         //displayData();
-        // displayStats();
-        // networkClick();
+        //displayStats();
+        //networkClick();
         //insertData();
         //displayPicker();
         //recordNote();
@@ -62,10 +58,10 @@ public class EnterPurchaseFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        view = inflater.inflate(R.layout.activity_alt, container, false);
+        view = inflater.inflate(R.layout.enter_purchase_fragment, container, false);
         enterButton = (Button) view.findViewById(R.id.enter_button);
-        displayButton = (Button) view.findViewById(R.id.display_button);
-        statButton = (Button) view.findViewById(R.id.stat_button);
+        //displayButton = (Button) view.findViewById(R.id.display_button);
+        //statButton = (Button) view.findViewById(R.id.stat_button);
         connect = (Button) view.findViewById(R.id.connect_button);
         purchaseName = (EditText) view.findViewById(R.id.Item_EditText);
         purchasePrice = (EditText) view.findViewById(R.id.Price_EditText);
@@ -78,23 +74,6 @@ public class EnterPurchaseFragment extends Fragment
         displayPicker();
         recordNote();
         return view;
-    }
-
-    public void displayStats()
-    {
-        /*
-        statButton.setOnClickListener(
-                new Button.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Intent go_displayStats = new Intent(EnterPurchaseFragment.this, StatFragment.class);
-                        startActivity(go_displayStats);
-                    }
-                }
-        );
-        */
     }
 
     public void insertData()
@@ -158,23 +137,6 @@ public class EnterPurchaseFragment extends Fragment
         );
     }
 
-    //launch displayData activity
-    public void displayData()
-    {
-        /*
-        displayButton.setOnClickListener(
-                new Button.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Intent go_displayData = new Intent(EnterPurchaseFragment.this, HistoryFrag.class);
-                        startActivity(go_displayData);
-                    }
-                }
-        );
-        */
-    }
 
 
     private boolean isEmpty(EditText t)
@@ -258,6 +220,9 @@ public class EnterPurchaseFragment extends Fragment
                     @Override
                     public void onClick(View v)
                     {
+                        EnterDialog enterDialog = new EnterDialog();
+                        enterDialog.show(getChildFragmentManager(), "Choose Date");
+                        /*
                         ConnectivityManager cmanager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                         NetworkInfo networkInfo = cmanager.getActiveNetworkInfo();
                         if (networkInfo != null && networkInfo.isConnected())
@@ -267,6 +232,7 @@ public class EnterPurchaseFragment extends Fragment
                         {
                             Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_LONG).show();
                         }
+                        */
                     }
                 }
         );
